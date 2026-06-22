@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>资料整理札记 · 亚博体育</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f4f2ef;
+            color: #2b2d30;
+            line-height: 1.75;
+            padding: 2rem 1.25rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrapper {
+            max-width: 960px;
+            width: 100%;
+        }
+
+        /* 叙事开场 —— 柔和引句 */
+        .story-hero {
+            background: transparent;
+            text-align: left;
+            margin-bottom: 2.8rem;
+            border-left: 4px solid #b0a69a;
+            padding-left: 1.8rem;
+        }
+
+        .story-hero p.lead {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #5b5e66;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-hero h1 {
+            font-size: 2.2rem;
+            font-weight: 450;
+            color: #1f2126;
+            line-height: 1.3;
+            margin-top: 0.25rem;
+        }
+
+        .story-hero h1 span {
+            font-weight: 300;
+            color: #7f827a;
+        }
+
+        /* 承接段落 —— 卡片区 */
+        .card {
+            background: #ffffff;
+            border: 1px solid #dedad4;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .context-text {
+            font-size: 1rem;
+            color: #3b3e45;
+            margin-bottom: 1rem;
+        }
+
+        .context-text strong {
+            font-weight: 550;
+            color: #1e1f23;
+        }
+
+        /* 特点列表 —— 信息索引式 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .feature-item {
+            background: #faf9f7;
+            border-radius: 18px;
+            padding: 1.2rem 1.2rem 1rem;
+            border: 1px solid #eae6e0;
+            transition: background 0.15s;
+        }
+
+        .feature-item:hover {
+            background: #f3f0eb;
+        }
+
+        .feature-item .emoji-marker {
+            display: inline-block;
+            font-size: 1.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1rem;
+            font-weight: 540;
+            color: #2e3138;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.01em;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #5b5e66;
+            line-height: 1.55;
+        }
+
+        /* 场景 / 提示 混合卡片 */
+        .scene-note {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            padding: 1rem 0 0.2rem;
+        }
+
+        .scene-half {
+            flex: 1 1 200px;
+        }
+
+        .scene-half h4 {
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: #353940;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dashed #d5cfc7;
+            padding-bottom: 0.25rem;
+        }
+
+        .scene-half ul {
+            list-style: none;
+        }
+
+        .scene-half ul li {
+            font-size: 0.95rem;
+            padding: 0.25rem 0;
+            color: #42464f;
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+
+        .scene-half ul li::before {
+            content: "·";
+            color: #9b9286;
+            font-weight: 700;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        /* 温和 FAQ 摘要 */
+        .faq-summary {
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e2ddd6;
+        }
+
+        .faq-summary details {
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-summary summary {
+            font-weight: 470;
+            color: #31343b;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .faq-summary summary::before {
+            content: "⊟";
+            font-size: 0.9rem;
+            color: #8f877b;
+            transition: transform 0.1s;
+        }
+
+        .faq-summary details[open] summary::before {
+            content: "⊟";
+            transform: rotate(90deg);
+        }
+
+        .faq-summary .answer {
+            margin: 0.5rem 0 0.8rem 1.2rem;
+            color: #54575f;
+            font-size: 0.95rem;
+            padding-left: 0.6rem;
+            border-left: 2px solid #d2ccc4;
+        }
+
+        /* 温和结尾 */
+        .gentle-closing {
+            margin-top: 1.8rem;
+            text-align: center;
+            padding: 1.2rem 0.5rem 0.8rem;
+            border-top: 1px solid #ddd9d2;
+        }
+
+        .gentle-closing p {
+            font-size: 0.98rem;
+            color: #4d5058;
+        }
+
+        .gentle-closing .link-sentence {
+            display: inline-block;
+            margin-top: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .gentle-closing a {
+            color: #3d3f44;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #b9afa3;
+            font-weight: 470;
+            transition: color 0.15s;
+        }
+
+        .gentle-closing a:hover {
+            color: #1f2126;
+            text-decoration-color: #1f2126;
+        }
+
+        /* 响应式 */
+        @media (max-width: 560px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            .story-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 16px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 开场 —— 故事引句 -->
+    <div class="story-hero">
+        <p class="lead">翻阅 · 归纳 · 索引</p>
+        <h1>在信息碎片中<br>找到一条清晰的脉络<span>。</span></h1>
+    </div>
+
+    <!-- 承接段落：从资料整理的角度展开 -->
+    <div class="card">
+        <p class="context-text">
+            一年多前，因为一个偶然的工作需求，我开始系统整理与体育资讯相关的公开资料。过程中，<strong>亚博体育</strong> 这个词反复出现在不同类目的记录里——赛事报道、数据聚合、社区讨论……它并非某个孤立的名字，而是逐渐变成索引条目中一个自然的节点。
+        </p>
+        <p class="context-text" style="margin-bottom: 0.2rem;">
+            我尝试用信息整理师的视角去理解它：一个信息源如果能在多个独立的资料集中被交叉引用，往往意味着它具有某种结构化的价值。不是宣传，不是口号，而是一种实证式的出现频率。这也是我在整理时一贯坚持的方法——不急于评价，先看见全貌。
+        </p>
+    </div>
+
+    <!-- 特点列表：信息索引式的特质归纳 -->
+    <div class="card">
+        <div style="display: flex; align-items: center; margin-bottom: 0.6rem;">
+            <span style="font-size: 1.3rem; margin-right: 0.5rem;">📋</span>
+            <h2 style="font-weight: 450; font-size: 1.3rem; color: #2c2f36;">资料索引中出现的共性特征</h2>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="emoji-marker">🗂️</div>
+                <h3>条目覆盖度</h3>
+                <p>在赛事分类、数据更新、基础信息聚合三个子集中均有稳定出现，非孤立条目。</p>
+            </div>
+            <div class="feature-item">
+                <div class="emoji-marker">🔗</div>
+                <h3>交叉引用频次</h3>
+                <p>与多个信息节点（赛事日历、队伍资料、统计工具）存在可追溯的链接关系。</p>
+            </div>
+            <div class="feature-item">
+                <div class="emoji-marker">📊</div>
+                <h3>结构化程度</h3>
+                <p>字段清晰，类别划分明确，便于做横向对比与记录归档。</p>
+            </div>
+            <div class="feature-item">
+                <div class="emoji-marker">⏳</div>
+                <h3>时间连续性</h3>
+                <p>在近几季的资料片段中保持了内容上的延续，非临时出现。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 场景 + 提示 混合卡片（温和实用向） -->
+    <div class="card">
+        <div class="scene-note">
+            <div class="scene-half">
+                <h4>📎 适合放入笔记的场景</h4>
+                <ul>
+                    <li>整理体育类资讯信息源时作为参考条目</li>
+                    <li>做赛事数据归档时标记常用聚合页面</li>
+                    <li>横向对比不同平台的分类与更新习惯</li>
+                </ul>
+            </div>
+            <div class="scene-half">
+                <h4>📌 整理时的小提示</h4>
+                <ul>
+                    <li>优先关注信息本身的准确度而非界面风格</li>
+                    <li>定期回溯已收录条目，剔除失效节点</li>
+                    <li>保留原始链接与归档日期，方便溯源</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要：温和、不夸张 -->
+    <div class="card">
+        <div style="display: flex; align-items: center; margin-bottom: 0.3rem;">
+            <span style="font-size: 1.2rem; margin-right: 0.5rem;">❔</span>
+            <h2 style="font-weight: 450; font-size: 1.15rem; color: #2c2f36;">一些常见但克制的疑问</h2>
+        </div>
+        <div class="faq-summary">
+            <details>
+                <summary>这个索引条目推荐给什么类型的使用者？</summary>
+                <div class="answer">更偏向于日常有信息梳理习惯、喜欢自行判断内容效度的个人整理者，或是对体育资讯条理性有要求的爱好者。</div>
+            </details>
+            <details>
+                <summary>整理过程中有什么特别需要注意的？</summary>
+                <div class="answer">任何索引都只是工具，最终判断依然依赖使用者自身的信息筛选标准。建议搭配多种来源交叉验证。</div>
+            </details>
+            <details>
+                <summary>可以直接用这个链接作为归档参考吗？</summary>
+                <div class="answer">当然。如果你在整理自己的资料库，可以将 <a href="https://mains-yabo.com" style="text-decoration: underline; text-underline-offset: 2px; color: #3d3f44; font-weight: 470;">亚博体育</a> 作为一个中立条目收录，并附上你自己的使用备注。</div>
+            </details>
+        </div>
+    </div>
+
+    <!-- 温和结尾 + 链接自然嵌入句子 -->
+    <div class="gentle-closing">
+        <p>整理与索引从来都不是终点，它们只是帮助我们在庞杂的信息中保持方向感的一种方式。</p>
+        <p class="link-sentence">
+            如果你也在做类似的信息归档，可以把这个条目记录为 <a href="https://mains-yabo.com">亚博体育</a>，并按照你自己的逻辑去观察、分类、更新。
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #6d7078;">—— 一篇来自普通资料整理者的笔记，2025</p>
+    </div>
+
+</div>
+</body>
+</html>
