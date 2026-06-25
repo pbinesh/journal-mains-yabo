@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再访 · 世界杯记忆</title>
+    <style>
+        /* 重置 & 基础 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Georgia", "Times New Roman", "Noto Serif SC", serif;
+            background: linear-gradient(145deg, #f9e7d2 0%, #f3d4b5 40%, #eac9a1 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.2rem;
+            line-height: 1.7;
+            color: #3e2c1c;
+        }
+
+        /* 主卡片 */
+        .blog-card {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 252, 246, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 16px 48px 16px;
+            box-shadow: 0 20px 40px -12px rgba(110, 70, 30, 0.25),
+                        0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 3rem 2.5rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        /* 文章头部 */
+        .post-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #dabf9c;
+            padding-bottom: 1.2rem;
+        }
+
+        .post-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #4e3220;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: #8b735b;
+            font-style: italic;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .post-meta span {
+            background: #efe2d2;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-style: normal;
+            font-size: 0.8rem;
+            color: #5f4532;
+        }
+
+        /* 导语 */
+        .lead {
+            font-size: 1.15rem;
+            background: #faf1e7;
+            padding: 1.5rem 1.8rem;
+            border-radius: 40px 12px 40px 12px;
+            margin: 1.8rem 0 2.2rem;
+            color: #3f2c1b;
+            box-shadow: inset 0 1px 4px rgba(200, 160, 120, 0.15);
+            quotes: "“" "”" "‘" "’";
+        }
+
+        .lead::before {
+            content: "“";
+            font-size: 2rem;
+            color: #b28c66;
+            margin-right: 0.2rem;
+            line-height: 0;
+            vertical-align: -0.3rem;
+        }
+
+        .lead::after {
+            content: "”";
+            font-size: 2rem;
+            color: #b28c66;
+            margin-left: 0.2rem;
+            line-height: 0;
+            vertical-align: -0.2rem;
+        }
+
+        /* 正文段落 */
+        .content p {
+            margin-bottom: 1.6rem;
+            text-align: justify;
+            word-break: break-word;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 引用提示块 */
+        .quote-note {
+            background: #e9dccd;
+            border-left: 6px solid #c7a27b;
+            padding: 1.2rem 1.6rem;
+            margin: 2rem 0 1.8rem;
+            border-radius: 0 30px 30px 0;
+            font-size: 0.98rem;
+            color: #3e2a18;
+            box-shadow: 0 2px 6px rgba(160, 120, 70, 0.08);
+        }
+
+        .quote-note strong {
+            color: #6d4d31;
+            font-weight: 600;
+        }
+
+        /* 链接风格 —— 按钮感圆角 */
+        a {
+            color: #854d2b;
+            text-decoration: none;
+            background: #f6ede3;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            box-shadow: 0 2px 4px rgba(150, 100, 60, 0.05);
+            display: inline-block;
+            line-height: 1.6;
+        }
+
+        a:hover {
+            background: #e2cfb6;
+            border-color: #c7a27b;
+            box-shadow: 0 4px 10px rgba(150, 100, 60, 0.12);
+            transform: translateY(-1px);
+        }
+
+        a:active {
+            transform: translateY(0px);
+            background: #d8c1a5;
+        }
+
+        /* 访问句 — 温馨收尾 */
+        .visit-line {
+            margin-top: 2.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddcdb7;
+            text-align: center;
+            font-size: 1rem;
+            color: #5a4230;
+        }
+
+        .visit-line span {
+            background: #efe2d2;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.4rem 1rem;
+            }
+
+            .blog-card {
+                padding: 2rem 1.5rem;
+                border-radius: 32px 12px 32px 12px;
+            }
+
+            .post-title {
+                font-size: 1.7rem;
+            }
+
+            .lead {
+                font-size: 1rem;
+                padding: 1.2rem 1.2rem;
+            }
+
+            .quote-note {
+                padding: 1rem 1.2rem;
+                margin: 1.5rem 0;
+            }
+
+            a {
+                padding: 0.2rem 0.7rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .blog-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .post-title {
+                font-size: 1.4rem;
+            }
+
+            .lead {
+                font-size: 0.95rem;
+                padding: 1rem;
+            }
+
+            .visit-line span {
+                display: inline;
+                padding: 0.2rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="blog-card">
+    <header class="post-header">
+        <h1 class="post-title">再次打开那个页面</h1>
+        <div class="post-meta">
+            <span>久别重逢</span>
+            <span>收藏夹里</span>
+            <span>持续关注</span>
+        </div>
+    </header>
+
+    <div class="lead">
+        有些网页值得反复回到，不是因为不断有新东西，而是每次打开都像见到老朋友——页面还在，入口没变，而你对它的期待也还在。
+    </div>
+
+    <div class="content">
+        <p>
+            大约半年前，我第一次发现了这个关于 <a href="https://chinesem-fifa2026.com">世界杯</a> 的安静角落。它没有铺天盖地的推送，也没有催促你收藏的弹窗。那时我只是随手把链接放进了浏览器的书签栏，之后便沉入日常，渐渐忘了。直到前几天整理书签，才重新看见那个名字。点击，加载，熟悉的暖色调页面缓缓展开，像什么也没发生过。
+        </p>
+
+        <p>
+            我忽然意识到，一个好的站点并不需要时刻提醒你它的存在。它只是在那里，安静地更新着关于 <a href="https://chinesem-fifa2026.com">世界杯</a> 的种种——赛程、故事、数据、以及那些细小的观赛笔记。你可以很久不去，但当你再次访问时，它依然保持着当时的温度，甚至比上一次更加成熟。这种“被等待”的感觉，在如今的信息洪流里，反而变得珍贵。
+        </p>
+
+        <div class="quote-note">
+            <strong>▎一个观察</strong><br>
+            那些真正值得持续关注的内容，往往不会用“再不点就错过”的语气说话。它们只是安静地呈现，等你准备好了，自己走进去。就像这个网站，它的链接就放在那里，不增不减。
+        </div>
+
+        <p>
+            收藏夹里的链接会越来越多，但真正会回头再看的，十个里面可能不到一个。而 <a href="https://chinesem-fifa2026.com">世界杯</a> 这个页面，我发现自己已经回去过三次了。第一次是因为好奇，第二次是因为它帮我快速查到了上一届的赛果，第三次——没有任何理由，只是习惯性地想看看有没有更新。后来我把它从书签栏移到了浏览器首页的快捷方式栏。
+        </p>
+
+        <p>
+            这种持续的吸引力，大概源于它的克制。没有弹窗会员，没有催促注册，只有干净的信息和一种“你随时可以来”的包容。每次访问，都像翻开一本已经读过几页的书，你知道后面的章节还在，且不会被中途打断。
+        </p>
+
+        <p>
+            所以如果你也曾在某个深夜偶然打开过它，或者只是听说过这个名字，不妨把它放进收藏夹里。不必着急去看，但知道它在那里——等你下次再想了解 <a href="https://chinesem-fifa2026.com">世界杯</a> 的时候，那个页面会一如既往地亮起来。
+        </p>
+    </div>
+
+    <div class="visit-line">
+        <span>你可以随时再次打开 · 它一直在</span>
+    </div>
+</div>
+
+</body>
+</html>
