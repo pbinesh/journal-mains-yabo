@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息卡片 · 世界杯查询与对照页</title>
+    <style>
+        /* 极简留白 + 窄正文宽度 + 清晰标题层级 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #fcfcfc;
+            color: #1e1e1e;
+            line-height: 1.6;
+            padding: 2.4rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* 标题层级 */
+        h1 {
+            font-size: 2rem;
+            font-weight: 450;
+            letter-spacing: -0.01em;
+            margin-top: 0.8rem;
+            margin-bottom: 1.6rem;
+            color: #111;
+            border-left: 4px solid #d4a373;
+            padding-left: 1rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 480;
+            margin-top: 2.8rem;
+            margin-bottom: 1rem;
+            color: #2b2b2b;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 450;
+            margin: 1.6rem 0 0.6rem 0;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            color: #3a3a3a;
+        }
+
+        a {
+            color: #a47148;
+            text-decoration: none;
+            border-bottom: 1px solid #d9b48f;
+            transition: border 0.15s;
+        }
+
+        a:hover {
+            border-bottom: 1px solid #7a5c3a;
+            color: #7a5c3a;
+        }
+
+        /* hero 简洁标识 */
+        .hero-note {
+            font-size: 0.85rem;
+            color: #7d7d7d;
+            background: #f2f0ed;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 信息卡片区 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 2rem 0 1.6rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e6e0d8;
+            border-radius: 16px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            border-bottom: 1px solid #efebe6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title span {
+            font-size: 0.9rem;
+            background: #edeae5;
+            padding: 0 10px;
+            border-radius: 12px;
+            color: #5e4d38;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 0.4rem 0;
+            display: flex;
+            gap: 0.6rem;
+            align-items: baseline;
+            border-bottom: 1px dashed #f0ece6;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .card li::before {
+            content: "·";
+            color: #b29573;
+            font-weight: 600;
+            margin-right: 0.2rem;
+        }
+
+        /* 人群卡片 —— 紧凑行 */
+        .people-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            margin: 0.4rem 0 0.2rem 0;
+        }
+
+        .people-tag {
+            background: #f3efe9;
+            padding: 0.25rem 0.9rem;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: #3f3a34;
+            border: 1px solid #e5ddd2;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #f7f5f1;
+            padding: 1.4rem 1.8rem;
+            border-radius: 16px;
+            border-left: 4px solid #dbb98c;
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        .faq-mini {
+            margin-top: 2.4rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e3dbd1;
+        }
+
+        .faq-mini details {
+            margin: 0.6rem 0;
+            padding: 0.6rem 0.8rem;
+            background: #fbf9f6;
+            border-radius: 10px;
+            border: 1px solid #ece6dd;
+        }
+
+        .faq-mini summary {
+            cursor: pointer;
+            font-weight: 480;
+            color: #2b241d;
+            padding: 0.2rem 0;
+            font-size: 1rem;
+        }
+
+        .faq-mini details p {
+            margin: 0.6rem 0 0.2rem 0;
+            font-size: 0.95rem;
+            color: #4b4340;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #8d877f;
+            margin: 3rem 0 1.2rem 0;
+            border-top: 1px solid #ece6de;
+            padding-top: 1.8rem;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 500px) {
+            body { padding: 1.6rem 1rem; }
+            h1 { font-size: 1.6rem; }
+            .card { padding: 1.2rem; }
+            .link-paragraph { padding: 1rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 区域：简洁提示 -->
+    <div class="hero-note">📋 信息卡片 · 日常查询 / 对照</div>
+    <h1>世界杯 &amp; 延伸阅读</h1>
+    <p style="font-size: 1.05rem; color: #47423c;">
+        从赛程查询到历史对照，从小组数据到延伸内容——这里把关于<a href="https://chineseline-fifa2026.com">世界杯</a>的常见信息整理成卡片，方便随时翻阅。
+        页面保持窄列，适合快速检索思路。
+    </p>
+
+    <!-- 卡片网格：用途卡片 -->
+    <h2>📌 用途卡片 · 日常查询与对照</h2>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-title">📆 赛程与对阵 <span>快速定位</span></div>
+            <ul>
+                <li>小组赛时间表 · 每日场次</li>
+                <li>淘汰赛对阵图 · 晋级路线</li>
+                <li>关键比赛日提醒</li>
+                <li>城市与球场对照</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-title">📊 积分与数据 <span>小组对照</span></div>
+            <ul>
+                <li>实时小组积分 · 净胜球</li>
+                <li>历史交手记录 · 风格对比</li>
+                <li>球队近况与预选赛路径</li>
+                <li>热门晋级概率参考</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-title">📖 延伸阅读 <span>背景补充</span></div>
+            <ul>
+                <li>历届冠军与经典决赛</li>
+                <li>球星与教练变迁</li>
+                <li>规则演变与趣闻</li>
+                <li>东道主文化特辑</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 适合人群 卡片式标签 -->
+    <h2>🧑‍🤝‍🧑 适合这样使用</h2>
+    <div class="card" style="padding: 1.4rem 1.8rem;">
+        <div class="people-group">
+            <span class="people-tag">🏟️ 日常球迷</span>
+            <span class="people-tag">📱 赛事查询</span>
+            <span class="people-tag">📅 行程规划</span>
+            <span class="people-tag">📚 知识拓展</span>
+            <span class="people-tag">🗂️ 数据对照</span>
+            <span class="people-tag">🧩 冷门补遗</span>
+            <span class="people-tag">🌍 世界杯文化</span>
+        </div>
+        <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.95rem; color: #4f4842;">
+            不论你是查小组形势、回顾历史，还是为看球做背景功课，卡片结构都能帮你快速找到对应板块。
+            信息保持精简，不带过度解读。
+        </p>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-paragraph">
+        <p style="margin-bottom: 0.6rem;">
+            <strong style="color: #2e2720;">📎 延伸与对照</strong>
+        </p>
+        <p style="margin-bottom: 0.4rem;">
+            如果你正在追踪最新预选赛走势或对比历年赛制，可以翻看 <a href="https://chineseline-fifa2026.com">世界杯</a> 页面里的详细分组与历史数据。
+            页面内容保持中立整理，没有额外跳转干扰，适合作为日常查询的固定锚点。
+        </p>
+        <p style="margin-bottom: 0; font-size: 0.95rem; color: #5d554b;">
+            另外，很多延伸阅读条目（如历届金靴、经典逆转）也会在相关段落里提供对照链接，方便在一个页面内来回参考。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要（简洁，非模板） -->
+    <div class="faq-mini">
+        <h3 style="margin-top: 0;">❓ 常见问题 · 摘要</h3>
+        <details>
+            <summary>这个信息卡片会实时更新吗？</summary>
+            <p>页面保持静态对照结构，基础赛程与背景内容会随赛事推进而修订。实时比分等动态数据建议配合官方直播使用。</p>
+        </details>
+        <details>
+            <summary>有没有球队历史交锋的详细页面？</summary>
+            <p>在 <a href="https://chineseline-fifa2026.com">世界杯</a> 主页面里可以找到历年交锋记录和小组对照表，适合赛前快速浏览。</p>
+        </details>
+        <details>
+            <summary>卡片里的延伸阅读包括哪些内容？</summary>
+            <p>包含世界杯经典比赛回顾、规则变化、东道主简史，以及一些不太被提及的球队故事，内容尽量保持中性、有据可查。</p>
+        </details>
+    </div>
+
+    <!-- 简单脚注 -->
+    <div class="footer-note">
+        信息卡片 · 集中对照 · 日常查询<br>
+        <span style="display: inline-block; margin-top: 6px; opacity: 0.6;">2026 世界杯  ·  非官方信息汇编</span>
+    </div>
+
+</div>
+</body>
+</html>
