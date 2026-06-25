@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChinesHub 2026 · 世界杯信息站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(145deg, #f9e3c5 0%, #f3d3aa 45%, #ecc896 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.2rem;
+            color: #2f2a22;
+        }
+
+        .container {
+            max-width: 780px;
+            width: 100%;
+        }
+
+        /* Hero 区——暖色渐变卡片，柔和明亮 */
+        .hero-card {
+            background: rgba(255, 248, 238, 0.92);
+            backdrop-filter: blur(3px);
+            border-radius: 40px 40px 28px 28px;
+            padding: 3rem 2.2rem 2.8rem;
+            box-shadow: 0 12px 28px rgba(160, 100, 50, 0.15),
+                        0 4px 12px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            margin-bottom: 2.8rem;
+            border: 1px solid rgba(255, 235, 210, 0.6);
+        }
+
+        .hero-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(130deg, #8f6b3e, #b3864e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: #5f4d36;
+            max-width: 520px;
+            margin: 0 auto 1.8rem auto;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: #e4cfb6;
+            color: #3d3226;
+            padding: 0.35rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            box-shadow: inset 0 1px 3px rgba(255, 245, 230, 0.5);
+        }
+
+        /* 通用卡片 */
+        .card {
+            background: #fffcf7;
+            border-radius: 28px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 8px 20px rgba(140, 90, 40, 0.08);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 235, 206, 0.5);
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 550;
+            color: #4f3f2b;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.6rem;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 54px;
+            height: 4px;
+            background: #dbb88c;
+            border-radius: 4px;
+        }
+
+        .card p {
+            margin-bottom: 1rem;
+            color: #3d3529;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature-item {
+            background: #f6ede1;
+            border-radius: 40px;
+            padding: 0.5rem 1.4rem 0.5rem 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            color: #3f3528;
+            border: 1px solid #efe0cd;
+        }
+
+        .feature-item::before {
+            content: '•';
+            color: #b3804d;
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        /* faq 片段样式 */
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #ebddcc;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 520;
+            color: #4f3d2a;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-a {
+            color: #4f4438;
+            padding-left: 0.2rem;
+        }
+
+        .faq-a a {
+            color: #7b5f3d;
+            text-decoration: underline 1px dotted #b99974;
+            text-underline-offset: 3px;
+            font-weight: 480;
+        }
+
+        .faq-a a:hover {
+            color: #a47a4b;
+            text-decoration: underline 1.5px solid #a47a4b;
+        }
+
+        /* 底部链接 */
+        .footnote {
+            background: #fcf3e7;
+            border-radius: 32px;
+            padding: 1.8rem 2rem;
+            text-align: center;
+            border: 1px solid #ebdaca;
+            margin-top: 0.4rem;
+        }
+
+        .footnote p {
+            color: #4b3d2e;
+            font-size: 0.98rem;
+        }
+
+        .footnote a {
+            color: #6d5237;
+            text-decoration: underline 1.5px dotted #c9aa7e;
+            text-underline-offset: 4px;
+            font-weight: 500;
+            padding: 0.1rem 0.2rem;
+            border-radius: 16px;
+            transition: background 0.2s, text-decoration-color 0.2s;
+        }
+
+        .footnote a:hover {
+            background: #eadac5;
+            text-decoration-color: #6d5237;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 550px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero-card {
+                padding: 2.2rem 1.2rem 2rem;
+                border-radius: 32px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 24px;
+            }
+            .card-title {
+                font-size: 1.3rem;
+            }
+            .features-grid {
+                gap: 0.7rem;
+            }
+            .feature-item {
+                font-size: 0.88rem;
+                padding: 0.4rem 1rem;
+            }
+            .footnote {
+                padding: 1.3rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* 所有链接的通用风格 */
+        a {
+            transition: 0.15s ease;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Hero -->
+    <div class="hero-card">
+        <div class="hero-title">绿茵焦点 · 2026</div>
+        <div class="hero-sub">关于世界杯的一处安静信息站<br>没有喧哗，只有扎实的赛事细节</div>
+        <span class="hero-tag">⚽ 基础信息 · 赛程 · 背景</span>
+    </div>
+
+    <!-- 优势 / 特点区 —— 站点说明 -->
+    <div class="card">
+        <div class="card-title">为什么可以信任这里</div>
+        <p>这个网站并非官方机构，而是一个由足球爱好者与资料整理者共同维护的静态页面集合。我们尽量从公开可靠的来源——例如国际足联官网、主办国旅游局、权威体育媒体——摘取和核对信息，再以简明的方式呈现。</p>
+        <p>所有内容均带有整理日期与参考来源简述，方便你回溯原始资料。我们不插入弹窗广告，也没有动态追踪脚本，只希望提供一个清爽的阅读环境。</p>
+        <div class="features-grid">
+            <span class="feature-item">信息标注来源</span>
+            <span class="feature-item">无弹窗 / 无追踪</span>
+            <span class="feature-item">赛历与分组</span>
+            <span class="feature-item">主办城市速览</span>
+        </div>
+    </div>
+
+    <!-- 说明区 —— 站点内容与使用场景 -->
+    <div class="card">
+        <div class="card-title">你可以在这里找到什么</div>
+        <p>目前的页面覆盖了2026年世界杯的基础轮廓：包括赛事时间、主办国和城市、参赛队伍名额分配、比赛场馆概览以及一些值得关注的规则变化。</p>
+        <p>我们尽量用平实的语言组织这些内容，不堆砌数据表格，也不渲染情绪。如果你只是想快速了解下一届世界杯的大致样貌，或者需要一些背景资料来和朋友聊球，这里应该能帮上一点忙。</p>
+        <p style="font-style: italic; color: #5f4d36;">每个页面底部都附带了最近一次数据核对的日期，方便你判断信息的新鲜程度。</p>
+    </div>
+
+    <!-- FAQ 摘要 —— 自然嵌入世界杯链接 -->
+    <div class="card">
+        <div class="card-title">常见疑问摘要</div>
+        <div class="faq-item">
+            <div class="faq-q">问：2026 年世界杯在哪几个国家举办？</div>
+            <div class="faq-a">美国、加拿大、墨西哥联合主办，共有 16 个承办城市。具体场馆分布与容量可以在我们的 <a href="https://chinesehub-fifa2026.com">世界杯</a> 页面中查看。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">问：网站信息多久更新一次？</div>
+            <div class="faq-a">通常每两到四周做一次核对，遇到官方发布重要调整（例如赛程变更、抽签结果）会尽快修订。网站首页会标注最近更新时间。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">问：为什么没有实时比分或直播链接？</div>
+            <div class="faq-a">这个站点更偏向于赛事前的参考与背景梳理，不包含实时数据。如果你想追踪即时信息，建议同时参考官方转播商或体育新闻网站。</div>
+        </div>
+    </div>
+
+    <!-- 底部链接 嵌入世界杯链接 -->
+    <div class="footnote">
+        <p>本页由 chinesehub-fifa2026 维护，你可以直接浏览关于 <a href="https://chinesehub-fifa2026.com">世界杯</a> 的整理内容。<br>希望这里的信息能为你提供一点踏实的参考。</p>
+        <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #6d5b48;">最近内容核对：2025 年 4 月 · 非官方信息站</p>
+    </div>
+</div>
+</body>
+</html>
